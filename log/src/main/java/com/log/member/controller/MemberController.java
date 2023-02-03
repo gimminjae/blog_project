@@ -1,5 +1,6 @@
 package com.log.member.controller;
 
+import com.log.base.exception.DataNotFoundException;
 import com.log.base.util.Ut;
 import com.log.member.dto.JoinDto;
 import com.log.member.dto.MemberDto;
@@ -31,7 +32,8 @@ public class MemberController {
     }
     @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> me(@AuthenticationPrincipal MemberContext memberContext) {
-        if (memberContext == null) { // 임시코드, 나중에는 시프링 시큐리티를 이용해서 로그인을 안했다면, 아예 여기로 못 들어오도록
+        if (memberContext == null) {
+            throw new DataNotFoundException("로그인이 필요합니다.");
         }
 
         return ResponseEntity.of(Optional.of(Ut.mapOf("member", memberContext)));

@@ -29,27 +29,18 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final MemberService memberService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String bearerToken = request.getHeader("Authorization");
+        String token = request.getHeader("Authorization");
         Cookie[] cookies = request.getCookies();
         //jwt를 헤더에 보내면 보안 강화
         //jwt를 쿠키에 담아서 보내면 보안은 비교적 약화되지만, 유연성 확보 가능
 
-        if (bearerToken != null) {
-//            String token = bearerToken.substring("Bearer ".length()); ???
-            String token = bearerToken;
-
+        if (token != null) {
             // 1차 체크(정보가 변조되지 않았는지 체크)
             if (jwtProvider.verify(token)) {
                 Map<String, Object> claims = jwtProvider.getClaims(token);
                 String username = (String) claims.get("username");
                 Member member = memberService.getByUsername(username).toEntity();
                 forceAuthentication(member);
-                // 캐시(레디스)를 통해서
-//                Member member = memberService.getByUsername__cached((String) claims.get("username"));
-                // 2차 체크(화이트리스트에 포함되는지)
-//                if (memberService.verifyWithWhiteList(member, token)) {
-//                    forceAuthentication(member);
-//                }
             }
         }
         filterChain.doFilter(request, response); //다음 필터를 실행시켜 주어야 한다
