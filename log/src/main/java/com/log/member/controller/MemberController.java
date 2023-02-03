@@ -33,7 +33,7 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> me(@AuthenticationPrincipal MemberContext memberContext) {
         if (memberContext == null) {
-            throw new DataNotFoundException("로그인이 필요합니다.");
+//            throw new DataNotFoundException("로그인이 필요합니다.");
         }
 
         return ResponseEntity.of(Optional.of(Ut.mapOf("member", memberContext)));

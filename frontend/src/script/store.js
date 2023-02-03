@@ -13,7 +13,7 @@ const store = createStore({
     ,
     mutations: {
         setUser(state, payload) {
-            state.user.id = payload.memberIdx;
+            state.user.id = payload.id;
         }
         ,
         removeUser(state) {
