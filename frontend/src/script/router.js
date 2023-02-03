@@ -3,6 +3,7 @@ import AppLogin from "@/pages/AppLogin";
 import PostForm from "@/pages/PostForm";
 import AppHome from "@/pages/AppHome";
 import AppJoin from "@/pages/AppJoin";
+import UserPage from "@/pages/UserPage";
 
 const routes = [
     {path:'/', component: AppHome},
@@ -10,6 +11,7 @@ const routes = [
     {path: '/login', component: AppLogin},
     {path: '/join', component: AppJoin},
     {path: '/write', component: PostForm},
+    {path: '/:nickname', component: UserPage}
     // {path: '/modify/:id', component: BoardModify},
 ]
 const router = createRouter({

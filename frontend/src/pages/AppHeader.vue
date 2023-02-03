@@ -9,6 +9,8 @@
         <a @click="logout" class="navbar-brand" href="#" v-if="$store.state.user.id != 0">로그아웃</a>
         <router-link to="/login" class="navbar-brand" v-else>로그인</router-link>
         <router-link to="/join" class="navbar-brand" href="#" v-if="$store.state.user.id == 0">회원가입</router-link>
+        <router-link :to="{path: `/${$store.state.user.nickname}`, }"
+                     class="navbar-brand" v-if="$store.state.user.id != 0">마이페이지</router-link>
       </div>
     </div>
   </nav>
@@ -26,6 +28,7 @@ export default {
     logout() {
       store.commit('removeUser');
       VueCookies.remove('access_token');
+      VueCookies.remove('nickname');
       router.push({path: '/'});
     }
   }

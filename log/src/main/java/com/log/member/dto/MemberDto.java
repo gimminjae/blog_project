@@ -1,9 +1,11 @@
 package com.log.member.dto;
 
 import com.log.member.entity.Member;
+import com.log.post.dto.PostDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder

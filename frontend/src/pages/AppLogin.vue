@@ -40,6 +40,7 @@ export default {
           .then(({data}) => {
             //토큰
             const jwt = data.accessToken;
+            const nickname = data.nickname;
 
             //토큰의 유효기간
             const expire = 60 * 60 * 24;
@@ -47,6 +48,12 @@ export default {
             //쿠키에 토큰을 저장한다.
             //보안 옵션을 줘도 https를 사용하지 않으면 보안 옵션은 작동하지 않는다.
             VueCookies.set('access_token', jwt, {
+              expires: expire,
+              secure: true,
+              httpOnly: true,
+              sameSite: 'strict'
+            });
+            VueCookies.set('nickname', nickname, {
               expires: expire,
               secure: true,
               httpOnly: true,

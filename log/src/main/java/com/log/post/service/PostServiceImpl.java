@@ -73,6 +73,11 @@ public class PostServiceImpl implements PostService {
         postRepository.delete(post);
     }
 
+    @Override
+    public List<PostDto> getByCreatorId(Long id) {
+        return postRepository.findByCreatorId(id).stream().map(post -> post.toDto()).toList();
+    }
+
     private void postIsNull(Post post) {
         if(post == null) {
             throw new DataNotFoundException("존재하지 않는 글입니다.");

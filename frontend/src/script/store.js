@@ -6,6 +6,7 @@ const store = createStore({
         return {
             user: {
                 id: 0,
+                nickname: ""
                 //회원 정보는 필요한 최소한의 정보만 가지고 있는 것이 좋다
             }
         }
@@ -14,6 +15,7 @@ const store = createStore({
     mutations: {
         setUser(state, payload) {
             state.user.id = payload.id;
+            state.user.nickname = payload.nickname;
         }
         ,
         removeUser(state) {

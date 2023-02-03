@@ -16,4 +16,6 @@ public interface PostService {
     PostDto update(MemberDto memberDto, PostDto postDto);
 
     void delete(MemberDto memberDto, PostDto postDto);
+
+    List<PostDto> getByCreatorId(Long id);
 }
