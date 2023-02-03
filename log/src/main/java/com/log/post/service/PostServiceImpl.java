@@ -61,6 +61,18 @@ public class PostServiceImpl implements PostService {
         return post.toDto();
     }
 
+    @Override
+    public void delete(MemberDto memberDto, PostDto postDto) {
+        if(memberDto.getId() != postDto.getCreatorId()) {
+            throw new AccessDeniedException("권한이 없습니다.");
+        }
+        Post post = postRepository.findById(postDto.getId()).orElse(null);
+
+        postIsNull(post);
+
+        postRepository.delete(post);
+    }
+
     private void postIsNull(Post post) {
         if(post == null) {
             throw new DataNotFoundException("존재하지 않는 글입니다.");

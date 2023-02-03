@@ -8,6 +8,7 @@ import com.log.post.dto.PostDto;
 import com.log.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,13 @@ public class PostController {
         return ResponseEntity.of(Optional.of(resultPostDto));
     }
     @DeleteMapping("/{postId}")
-    public ResponseEntity<String> deletePost(@AuthenticationPrincipal MemberContext memberContext, @PathVariable long postId) {
-        return ResponseEntity.of(Optional.of("delete /api/post"));
+    public ResponseEntity deletePost(@AuthenticationPrincipal MemberContext memberContext, @PathVariable long postId) {
+        MemberDto memberDto = memberService.getById(memberContext == null ? 0 : memberContext.getId());
+
+        PostDto postDto = postService.getById(postId);
+
+        postService.delete(memberDto, postDto);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
