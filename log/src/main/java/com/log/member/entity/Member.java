@@ -32,6 +32,7 @@ public class Member extends BaseEntity {
     private String nickname;
     @Column(unique = true)
     private String email;
+    private long postCount;
 
     public MemberDto toDto() {
         return MemberDto.builder()
@@ -42,6 +43,7 @@ public class Member extends BaseEntity {
                 .email(this.getEmail())
                 .createDateTime(this.getCreateDateTime())
                 .updateDateTime(this.getUpdateDateTime())
+                .postCount(this.postCount)
                 .build();
     }
     public Map<String, Object> getAccessTokenClaims() {

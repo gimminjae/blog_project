@@ -17,6 +17,7 @@ public class MemberDto {
     private String password;
     private String nickname;
     private String email;
+    private long postCount;
 
     public Member toEntity() {
         Member member = Member.builder()
@@ -24,6 +25,7 @@ public class MemberDto {
                 .password(this.getPassword())
                 .nickname(this.getNickname())
                 .email(this.getEmail())
+                .postCount(this.postCount)
                 .build();
         member.setId(this.getId());
         member.setCreateDateTime(this.getCreateDateTime());
