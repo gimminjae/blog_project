@@ -35,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
                 .build();
         member.setCreateDateTime(LocalDateTime.now());
         member.setUpdateDateTime(LocalDateTime.now());
+
         try {
             memberRepository.save(member);
         } catch(DataIntegrityViolationException e) {

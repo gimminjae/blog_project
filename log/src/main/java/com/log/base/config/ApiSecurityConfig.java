@@ -4,6 +4,7 @@ package com.log.base.config;
 import com.log.base.config.jwt.filter.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -39,7 +40,7 @@ public class ApiSecurityConfig {
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers("/api/member/login").permitAll()
                                 .requestMatchers("/api/member/me").permitAll()
-                                .requestMatchers("/api/board/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/post/**").permitAll()
                                 .anyRequest()
                                 .authenticated() // 최소자격 : 로그인
                         //login, me 를 제외한 다른 요청의 최소자격은 로그인이다.

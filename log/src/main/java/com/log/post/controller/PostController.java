@@ -1,15 +1,16 @@
 package com.log.post.controller;
 
 import com.log.base.util.Ut;
+import com.log.member.dto.MemberDto;
+import com.log.member.entity.MemberContext;
+import com.log.member.service.MemberService;
 import com.log.post.dto.PostDto;
 import com.log.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @RequestMapping("/api/post")
 public class PostController {
     private final PostService postService;
+    private final MemberService memberService;
 
     @GetMapping("/all")
     public ResponseEntity<List<PostDto>> getAllPost() {
@@ -27,5 +29,26 @@ public class PostController {
     @GetMapping("/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable long postId) {
         return ResponseEntity.of(Optional.of(postService.getById(postId)));
+    }
+    @PostMapping("")
+    public ResponseEntity<PostDto> writePost(@AuthenticationPrincipal MemberContext memberContext, @RequestBody PostDto postDto) {
+        MemberDto memberDto = memberService.getById(memberContext == null ? 0 : memberContext.getId());
+
+        PostDto resultPostDto = postService.create(memberDto, postDto);
+
+        return ResponseEntity.of(Optional.of(resultPostDto));
+    }
+    @PutMapping("/{postId}")
+    public ResponseEntity<PostDto> modifyPost(@AuthenticationPrincipal MemberContext memberContext, @PathVariable long postId, @RequestBody PostDto postDto) {
+        MemberDto memberDto = memberService.getById(memberContext == null ? 0 : memberContext.getId());
+
+        postDto.setId(postId);
+        PostDto resultPostDto = postService.update(memberDto, postDto);
+
+        return ResponseEntity.of(Optional.of(resultPostDto));
+    }
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<String> deletePost(@AuthenticationPrincipal MemberContext memberContext, @PathVariable long postId) {
+        return ResponseEntity.of(Optional.of("delete /api/post"));
     }
 }
