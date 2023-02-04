@@ -1,8 +1,14 @@
 <template>
   <div class="container">
-    {{ this.member.nickname }}
-    {{ this.member.email }}
-    {{ this.member.introduce }}
+    <div class="d-flex gap-3">
+      <div>
+        <h1>{{ this.member.nickname }}</h1>
+        <h5>{{ this.member.email }}</h5>
+      </div>
+      <div>
+        {{ this.member.introduce }}
+      </div>
+    </div>
     <table class="table table-hover">
       <thead class="table">
       <tr class="text-center">
