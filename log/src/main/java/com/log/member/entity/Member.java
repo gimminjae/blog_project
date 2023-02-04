@@ -60,4 +60,8 @@ public class Member extends BaseEntity {
 
         return authorities;
     }
+
+    public void upPostCount() {
+        this.postCount++;
+    }
 }

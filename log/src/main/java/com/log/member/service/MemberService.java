@@ -16,4 +16,5 @@ public interface MemberService {
     String genAccessToken(Member member);
 
     MemberDto login(String username, String password);
+    void upMembersPostCount(MemberDto memberDto);
 }

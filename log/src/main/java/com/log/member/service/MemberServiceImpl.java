@@ -90,6 +90,17 @@ public class MemberServiceImpl implements MemberService {
         return member;
     }
 
+    @Override
+    public void upMembersPostCount(MemberDto memberDto) {
+        Member member = memberRepository.findById(memberDto.getId()).orElse(null);
+
+        notFoundMember(member);
+
+        member.upPostCount();
+
+        memberRepository.save(member);
+    }
+
     //글 정보가 null 일 경우
     private void notFoundMember(Member member) {
         if (member == null) {

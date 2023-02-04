@@ -36,6 +36,7 @@ public class PostController {
         MemberDto memberDto = memberService.getById(memberContext == null ? 0 : memberContext.getId());
 
         PostDto resultPostDto = postService.create(memberDto, postDto);
+        memberService.upMembersPostCount(memberDto);
 
         return ResponseEntity.of(Optional.of(resultPostDto));
     }
