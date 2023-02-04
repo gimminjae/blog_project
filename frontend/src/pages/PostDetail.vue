@@ -1,6 +1,12 @@
 <template>
   <div class="container" style="width: 80%;">
-    <h1>{{ post.title }}</h1>
+    <div class="d-flex justify-content-between my-3">
+      <h1>{{ post.title }}</h1>
+      <div class="d-flex gap-3">
+        <router-link :to="{path: `/modify/${this.postId}`}" class="">수정</router-link>
+        <a class="">삭제</a>
+      </div>
+    </div>
     <div id="viewer" class="my-3"></div>
   </div>
 </template>
