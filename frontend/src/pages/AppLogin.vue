@@ -60,8 +60,8 @@ export default {
               sameSite: 'strict'
             });
 
-            //로그인 후 홈페이지로 이동
-            router.push({path: '/'});
+            //로그인 후 마이페이지로 이동
+            router.push({path: `/${nickname}`});
           })
           .catch((error) => {
             alert(error.response.data);

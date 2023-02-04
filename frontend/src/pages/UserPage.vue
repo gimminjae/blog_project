@@ -1,10 +1,22 @@
 <template>
-  마이페이지
-
-  {{ this.member.nickname }}
-  {{ this.member.email }}
-  {{ this.member.createDateTime }}
-  {{ this.postList }}
+  <div class="container">
+    {{ this.member.nickname }}
+    {{ this.member.email }}
+    <table class="table table-hover">
+      <thead class="table">
+      <tr class="text-center">
+        <th style="width: 70%;">제목</th>
+        <th>작성일시</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" v-for="post in postList" :key="post">
+        <td><router-link :to="{path: `/post/${post.id}`, }">{{ post.title }}</router-link></td>
+        <td>{{ post.createDateTime }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -12,14 +24,10 @@ import VueCookies from "vue-cookies";
 
 export default {
   name: "UserPage",
-  components: {
-
-  },
+  components: {},
   data() {
     return {
-      member: {
-
-      },
+      member: {},
       postList: []
     }
   },
@@ -33,7 +41,7 @@ export default {
             this.member = data.member;
             this.postList = data.postList;
           }).catch((error) => {
-            console.log(error);
+        console.log(error);
       })
     }
   }

@@ -29,7 +29,6 @@ export default {
       axios.get("/api/member/me", config)
           .then(res => {
             const user = res.data.member;
-            console.log(res);
 
             if (user != null) {
               store.commit('setUser', user);

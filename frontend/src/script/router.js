@@ -4,10 +4,11 @@ import PostForm from "@/pages/PostForm";
 import AppHome from "@/pages/AppHome";
 import AppJoin from "@/pages/AppJoin";
 import UserPage from "@/pages/UserPage";
+import PostDetail from "@/pages/PostDetail";
 
 const routes = [
     {path:'/', component: AppHome},
-    // {path: '/detail/:id', component: BoardDetail},
+    {path: '/post/:id', component: PostDetail},
     {path: '/login', component: AppLogin},
     {path: '/join', component: AppJoin},
     {path: '/write', component: PostForm},
