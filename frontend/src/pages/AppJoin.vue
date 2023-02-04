@@ -16,14 +16,19 @@
              aria-label=".form-control-lg example" v-model="this.MemberDto.password2" @keyup.enter="join">
     </div>
     <div class="mb-3">
-      <h3>nickname</h3>
+      <h3>Nickname</h3>
       <input class="form-control form-control-lg" type="text" placeholder="nickname" id="nickname"
              aria-label=".form-control-lg example" v-model="this.MemberDto.nickname" @keyup.enter="join">
     </div>
     <div class="mb-3">
-      <h3>email</h3>
-      <input class="form-control form-control-lg" type="email" placeholder="Email" id="email"
+      <h3>Email</h3>
+      <input class="form-control form-control-lg" type="email" placeholder="이메일은 비밀번호 변경, 혹은 아이디 찾기 등에 이용될 수 있습니다." id="email"
              aria-label=".form-control-lg example" v-model="this.MemberDto.email" @keyup.enter="join">
+    </div>
+    <div class="mb-3">
+      <h3>Introduce</h3>
+      <textarea class="form-control form-control-lg" type="text" placeholder="어떤 것에 관심이 있고, 무엇을 하는지, 무엇을 목표로 하는지, 직업은 무엇인지, 자신을 소개해 보세요!" id="introduce"
+                aria-label=".form-control-lg example" v-model="this.MemberDto.introduce" @keyup.enter="join"></textarea>
     </div>
     <div class="d-flex justify-content-around mb-3">
       <button style="width: 48%;" type="button" class="btn btn-info" @click="join">회원가입</button>
@@ -78,7 +83,8 @@ export default {
         password1: "",
         password2: "",
         nickname: "",
-        email: ""
+        email: "",
+        introduce: ""
       }
     }
   },

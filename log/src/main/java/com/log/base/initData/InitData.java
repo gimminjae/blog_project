@@ -1,5 +1,6 @@
 package com.log.base.initData;
 
+import com.log.member.dto.JoinDto;
 import com.log.member.dto.MemberDto;
 import com.log.member.service.MemberService;
 import com.log.post.dto.PostDto;
@@ -20,8 +21,8 @@ public class InitData {
             MemberService memberService
     ) {
         return args -> {
-            memberService.create("user1", "user1", "user1", "user@test.com", "haha");
-            memberService.create("user2", "user2", "user2", "user2@test.com", "keke");
+            memberService.create(new JoinDto("user1", "user1", "user1", "user@test.com", "haha", "Introduce1"));
+            memberService.create(new JoinDto("user2", "user2", "user2", "user2@test.com", "keke", "introduce2"));
 
             MemberDto memberDto = memberService.getById(1);
 

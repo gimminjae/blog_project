@@ -1,5 +1,6 @@
 package com.log.member.service;
 
+import com.log.member.dto.JoinDto;
 import com.log.member.dto.MemberDto;
 import com.log.member.entity.Member;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import java.util.List;
 
 
 public interface MemberService {
-    void create(String username, String password1, String password2, String email, String nickname);
+    void create(JoinDto joinDto);
     MemberDto getById(long memberIdx);
     List<MemberDto> getAll();
     MemberDto getByUsername(String username);

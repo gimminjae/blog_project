@@ -2,6 +2,7 @@ package com.log.member.service;
 
 import com.log.base.config.jwt.provider.JwtProvider;
 import com.log.base.exception.DataNotFoundException;
+import com.log.member.dto.JoinDto;
 import com.log.member.dto.MemberDto;
 import com.log.member.entity.Member;
 import com.log.member.repository.MemberRepository;
@@ -22,16 +23,17 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void create(String username, String password1, String password2, String email, String nickname) {
-        if (!password1.equals(password2)) {
+    public void create(JoinDto joinDto) {
+        if (!joinDto.getPassword1().equals(joinDto.getPassword2())) {
             throw new AccessDeniedException("두 개의 비밀번호가 일치하지 않습니다.");
         }
 
         Member member = Member.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password1))
-                .nickname(nickname)
-                .email(email)
+                .username(joinDto.getUsername())
+                .password(passwordEncoder.encode(joinDto.getPassword1()))
+                .nickname(joinDto.getNickname())
+                .email(joinDto.getEmail())
+                .introduce(joinDto.getIntroduce())
                 .build();
         member.setCreateDateTime(LocalDateTime.now());
         member.setUpdateDateTime(LocalDateTime.now());

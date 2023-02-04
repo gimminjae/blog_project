@@ -52,7 +52,7 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity join(@RequestBody JoinDto joinDto) {
         //회원가입
-        memberService.create(joinDto.getUsername(), joinDto.getPassword1(), joinDto.getPassword2(), joinDto.getEmail(), joinDto.getNickname());
+        memberService.create(joinDto);
 
         return new ResponseEntity(HttpStatus.OK);
     }

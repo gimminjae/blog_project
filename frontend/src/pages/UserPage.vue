@@ -2,6 +2,7 @@
   <div class="container">
     {{ this.member.nickname }}
     {{ this.member.email }}
+    {{ this.member.introduce }}
     <table class="table table-hover">
       <thead class="table">
       <tr class="text-center">

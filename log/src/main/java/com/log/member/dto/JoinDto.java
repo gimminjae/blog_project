@@ -1,9 +1,11 @@
 package com.log.member.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class JoinDto {
     @NotEmpty(message = "username 을(를) 입력해주세요.")
     private String username;
@@ -15,4 +17,5 @@ public class JoinDto {
     private String email;
     @NotEmpty(message = "nickname 을(를) 입력해주세요.")
     private String nickname;
+    private String introduce;
 }
