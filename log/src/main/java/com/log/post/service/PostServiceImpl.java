@@ -75,7 +75,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDto> getByCreatorId(Long id) {
-        return postRepository.findByCreatorId(id).stream().map(post -> post.toDto()).toList();
+        return postRepository.findByCreatorIdOrderByCreateDateTimeDesc(id).stream().map(post -> post.toDto()).toList();
     }
 
     private void postIsNull(Post post) {
