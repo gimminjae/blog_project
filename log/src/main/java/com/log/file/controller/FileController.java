@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,9 +23,12 @@ import java.util.UUID;
 public class FileController {
     @Value("${spring.custom.genFileDirPath}")
     private String genFileDirPath;
+    @Value("${spring.custom.rootUrl}")
+    private String rootUrl;
     @PostMapping("/api/file")
     public ResponseEntity<String> fileUploadInPostForm(@AuthenticationPrincipal MemberContext memberContext, @RequestBody MultipartFile file) {
-        String profileImgRelPath = "member/" + UUID.randomUUID().toString() + ".png";
+        String today = LocalDate.now().toString();
+        String profileImgRelPath = "member/" + today + "/" + UUID.randomUUID().toString() + ".png";
         File profileImgFile = new File(genFileDirPath + "/" + profileImgRelPath);
 
         profileImgFile.mkdirs(); // 관련된 폴더가 혹시나 없다면 만들어준다.
@@ -34,6 +38,6 @@ public class FileController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return ResponseEntity.of(Optional.of(profileImgRelPath));
+        return ResponseEntity.of(Optional.of(rootUrl + "/gen/" + profileImgRelPath));
     }
 }
