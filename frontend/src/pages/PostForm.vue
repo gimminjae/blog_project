@@ -30,7 +30,28 @@ export default {
         el: document.querySelector('#editor'),
         initialEditType: 'markdown',
         previewStyle: 'vertical',
-        height: '600px'
+        height: '600px',
+        hooks: {
+          addImageBlobHook: (blob, callback) => {
+            console.log(blob);
+            const formData = new FormData();
+            formData.append('file', blob);
+
+            console.log(formData);
+            let imageUrl = '';
+            // Send the image data to a server
+            axios.post(`/api/file`, formData)
+                .then((res) => {
+                  imageUrl = res.data;
+                  callback(imageUrl);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            // Receive the URL of the uploaded image
+            // Replace the Base64 encoded image data with the URL
+          }
+        }
       });
       this.editor.setMarkdown('');
   },
